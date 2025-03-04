@@ -1,5 +1,12 @@
 [
   {
+    "name": "Weekly Build",
+    "platform": "all",
+    "date": "2025-03-04",
+    "downloadUrl": "https://example.com/weekly-build.zip",
+    "isWeekly": true
+  },
+  {
     "name": "Ladybird 0.1.0 Windows",
     "platform": "windows",
     "date": "2025-03-04",
@@ -17,12 +24,5 @@
     "platform": "macos",
     "date": "2025-03-04",
     "downloadUrl": "https://example.com/ladybird-0.1.0-macos.dmg"
-  },
-  {
-    "name": "Weekly Build",
-    "platform": "all",
-    "date": "2025-03-04",
-    "downloadUrl": "https://example.com/weekly-build.zip",
-    "isWeekly": true
   }
 ]
