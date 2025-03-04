@@ -71,16 +71,16 @@ document.getElementById("platformFilter").addEventListener("change", (e) => {
 });
 
 // Handle weekly build button
-document.getElementById("weeklyBuild").addEventListener("click", () => {
-  fetchBuilds().then((builds) => {
-    const weeklyBuild = builds.find((build) => build.isWeekly);
-    if (weeklyBuild) {
-      window.location.href = weeklyBuild.downloadUrl;
-    } else {
-      alert("Weekly build not found.");
-    }
-  });
-});
+// document.getElementById("weeklyBuild").addEventListener("click", () => {
+//   fetchBuilds().then((builds) => {
+//     const weeklyBuild = builds.find((build) => build.isWeekly);
+//     if (weeklyBuild) {
+//       window.location.href = weeklyBuild.downloadUrl;
+//     } else {
+//       alert("Weekly build not found.");
+//     }
+//   });
+// });
 
 // Initial load
 fetchBuilds().then((builds) => renderBuilds(builds));
