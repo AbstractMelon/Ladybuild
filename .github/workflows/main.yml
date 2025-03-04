@@ -1,0 +1,36 @@
+name: Build and Archive Ladybird
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up dependencies
+        run: sudo apt update && sudo apt install -y autoconf autoconf-archive automake build-essential ccache cmake curl fonts-liberation2 git libgl1-mesa-dev nasm ninja-build pkg-config qt6-base-dev qt6-tools-dev-tools qt6-wayland tar unzip zip libpulse-dev
+
+      - name: Run Ladybird setup script
+        run: |
+          ./scripts/setup_Ladybird.sh
+
+      - name: Create Builds Directory
+        run: mkdir -p builds
+
+      - name: Move Archive to Builds
+        run: mv ladybird_build.tar.gz builds/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ladybird-build
+          path: builds/ladybird_build.tar.gz
