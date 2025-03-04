@@ -21,6 +21,7 @@ jobs:
 
       - name: Run Ladybird setup script
         run: |
+          chmod u+x ./scripts/setup_Ladybird.sh
           ./scripts/setup_Ladybird.sh
 
       - name: Create Builds Directory
