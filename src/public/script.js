@@ -1,9 +1,7 @@
-// Fetch build data from GitHub
+// Fetch build data from API
 const fetchBuilds = async () => {
   try {
-    const response = await fetch(
-      "https://raw.githubusercontent.com/AbstractMelon/ladybuild/refs/heads/master/builds/builds.json"
-    );
+    const response = await fetch("/api/builds");
     if (!response.ok) throw new Error("Failed to fetch builds");
     return await response.json();
   } catch (error) {
@@ -34,7 +32,7 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
   filteredBuilds.forEach((build) => {
     const buildItem = document.createElement("div");
     buildItem.className =
-      "p-4 bg-dark-purple rounded-lg hover:bg-dark-purple transition-all";
+      "p-4 bg-dark-purple rounded-lg hover:bg-dark-purple transition-all duration-300";
     buildItem.innerHTML = `
           <h3 class="text-xl font-semibold text-purple-400">${build.name}</h3>
           <div class="mb-4">
@@ -45,7 +43,7 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
           <p class="text-gray-400 mb-4">${build.date}</p>
           <a
             href="${build.downloadUrl}"
-            class="w-full block text-center bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition duration-300"
+            class="w-full block text-center bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300"
           >
             Download
           </a>

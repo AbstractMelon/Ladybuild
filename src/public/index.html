@@ -19,10 +19,47 @@
       .hover\:bg-dark-purple:hover {
         background-color: #3a3a50;
       }
+      .banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #f3f4f6;
+        padding: 1rem;
+        text-align: center;
+        z-index: 1000;
+      }
+      .banner a {
+        text-decoration: underline;
+        color: #d1d5db;
+      }
+      .close-banner {
+        position: absolute;
+        right: 1rem;
+        top: 0.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #f3f4f6;
+        font-size: 1.5rem;
+      }
     </style>
   </head>
   <body class="font-sans">
-    <div class="container mx-auto p-4">
+    <div class="banner bg-red-500">
+      <p class="text-lg">
+        <b>WARNING:</b> This is not an official site. Official downloads will be
+        available by the creators in 2026. Report issues
+        <a href="https://github.com/abstractmelon/ladybuild/issues">here</a>.
+      </p>
+      <button
+        class="close-banner"
+        onclick="this.parentElement.style.display='none'"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="container mx-auto p-4 mt-16">
       <header class="text-center mb-8">
         <h1 class="text-6xl font-bold text-purple-400">LadyBuild</h1>
         <p class="text-2xl mt-2">Unofficial Ladybird Builds</p>
@@ -47,24 +84,10 @@
           </select>
         </div>
 
-        <div
-          class="flex justify-center mb-6 p-4 bg-red-500 border border-red-800 rounded-lg"
-        >
-          <p class="text-lg">
-            <b>WARNING:</b> This is not an official site. Official downloads
-            will be available by the creators in 2026. Report issues
-            <a
-              href="https://github.com/your-repo/ladybuild/issues"
-              class="text-gray-200 underline"
-              >here</a
-            >.
-          </p>
-        </div>
-
         <div class="flex justify-center mb-6">
           <button
             id="weeklyBuild"
-            class="w-full p-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold"
+            class="w-full p-3 bg-purple-600 hover:bg-purple-800 rounded-lg text-white font-semibold text-xl transition duration-300"
           >
             Download Weekly Build
           </button>

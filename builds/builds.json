@@ -1,19 +1,19 @@
 [
   {
-    "name": "Ladybird 0.1.0 Windows - Stable(ish)",
+    "name": "Ladybird 0.1.0 Windows",
     "platform": "windows",
     "date": "2025-03-04",
-    "downloadUrl": "https://example.com/ladybird-0.1.0-windows.zip",
+    "downloadUrl": "https://raw.githubusercontent.com/AbstractMelon/Ladybuild/main/builds/ladybird-0.1.0-windows.zip",
     "isWeekly": true
   },
   {
-    "name": "Ladybird 0.1.0 Linux - Stable(ish)",
+    "name": "Ladybird 0.1.0 Linux",
     "platform": "linux",
     "date": "2025-03-04",
     "downloadUrl": "https://example.com/ladybird-0.1.0-linux.tar.gz"
   },
   {
-    "name": "Ladybird 0.1.0 macOS - Stable(ish)",
+    "name": "Ladybird 0.1.0 macOS",
     "platform": "macos",
     "date": "2025-03-04",
     "downloadUrl": "https://example.com/ladybird-0.1.0-macos.dmg"
