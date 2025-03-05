@@ -4,7 +4,7 @@
     "name": "Weekly Build",
     "platform": "all",
     "date": "2025-03-04",
-    "downloadUrl": "https://example.com/weekly-build.zip",
+    "downloadUrl": "https://raw.githubusercontent.com/AbstractMelon/Ladybuild/main/builds/ladybird-0.1.0-linux.tar.gz",
     "isWeekly": true
   },
   {
