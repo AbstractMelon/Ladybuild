@@ -1,9 +1,6 @@
 name: Build and Archive Ladybird
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
