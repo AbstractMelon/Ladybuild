@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LadyBuild Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #1a1a2e;
+        color: #e0e0e0;
+      }
+      .bg-dark-purple {
+        background-color: #2a2a40;
+      }
+      .hover\:bg-dark-purple:hover {
+        background-color: #3a3a50;
+      }
+      .banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #f3f4f6;
+        padding: 1rem;
+        text-align: center;
+        z-index: 1000;
+      }
+      .banner a {
+        text-decoration: underline;
+        color: #d1d5db;
+      }
+      .close-banner {
+        position: absolute;
+        right: 1rem;
+        top: 0.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #f3f4f6;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <div class="banner bg-red-500 mb-4">
+      <p class="text-lg">
+        <b>WARNING:</b> This is not an official site. Official downloads will be
+        available by the creators in 2026. Report issues
+        <a href="https://github.com/abstractmelon/ladybuild/issues">here</a>.
+      </p>
+      <button
+        class="close-banner"
+        onclick="this.parentElement.style.display='none'"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="container mx-auto p-4 mt-16">
+      <header class="text-center mb-8">
+        <h1 class="text-6xl font-bold text-purple-400">
+          LadyBuild Admin Dashboard
+        </h1>
+        <p class="text-2xl mt-2">
+          Unofficial Ladybird Builds Download Statistics
+        </p>
+      </header>
+
+      <main>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          <div class="card bg-dark-purple rounded-lg p-4">
+            <h2 class="text-2xl font-semibold">Total Downloads</h2>
+            <p class="text-4xl">12345</p>
+          </div>
+          <div class="card bg-dark-purple rounded-lg p-4">
+            <h2 class="text-2xl font-semibold">Weekly Downloads</h2>
+            <p class="text-4xl">567</p>
+          </div>
+          <div class="card bg-dark-purple rounded-lg p-4">
+            <h2 class="text-2xl font-semibold">Monthly Downloads</h2>
+            <p class="text-4xl">2345</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-6 max-h-1/3">
+          <canvas id="downloadsChart" class="chart rounded-lg"></canvas>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById("downloadsChart").getContext("2d");
+      const downloadsChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["January", "February", "March", "April", "May"],
+          datasets: [
+            {
+              label: "Downloads",
+              data: [300, 500, 400, 700, 600],
+              borderColor: "#8b5cf6",
+              backgroundColor: "rgba(139, 92, 246, 0.2)",
+              borderWidth: 8,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: "rgba(255, 255, 255, 0.1)",
+              },
+              ticks: {
+                color: "#e0e0e0",
+              },
+            },
+            x: {
+              grid: {
+                color: "rgba(255, 255, 255, 0.1)",
+              },
+              ticks: {
+                color: "#e0e0e0",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "#e0e0e0",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

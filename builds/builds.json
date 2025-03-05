@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Weekly Build",
     "platform": "all",
     "date": "2025-03-04",
@@ -7,6 +8,7 @@
     "isWeekly": true
   },
   {
+    "id": 2,
     "name": "Ladybird 0.1.0 Windows",
     "platform": "windows",
     "date": "2025-03-04",
@@ -14,12 +16,14 @@
     "isWeekly": true
   },
   {
+    "id": 3,
     "name": "Ladybird 0.1.0 Linux",
     "platform": "linux",
     "date": "2025-03-04",
-    "downloadUrl": "https://example.com/ladybird-0.1.0-linux.tar.gz"
+    "downloadUrl": "https://raw.githubusercontent.com/AbstractMelon/Ladybuild/main/builds/ladybird-0.1.0-linux.zip"
   },
   {
+    "id": 4,
     "name": "Ladybird 0.1.0 macOS",
     "platform": "macos",
     "date": "2025-03-04",

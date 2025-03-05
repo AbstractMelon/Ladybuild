@@ -10,6 +10,18 @@ const fetchBuilds = async () => {
   }
 };
 
+// Increment download count for a build
+const incrementDownloadCount = async (buildId) => {
+  try {
+    const response = await fetch("/api/builds/" + buildId + "/increment", {
+      method: "POST",
+    });
+    if (!response.ok) throw new Error("Failed to increment download count");
+  } catch (error) {
+    console.error("Error incrementing download count:", error);
+  }
+};
+
 // Render builds to the DOM
 const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
   const buildList = document.getElementById("buildList");
@@ -44,6 +56,7 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
           <a
             href="${build.downloadUrl}"
             class="w-full block text-center bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300"
+            onclick="incrementDownloadCount(${build.id})"
           >
             Download
           </a>
