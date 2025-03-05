@@ -11,14 +11,38 @@ const fetchBuilds = async () => {
 };
 
 // Increment download count for a build
-const incrementDownloadCount = async (buildId) => {
+const incrementDownloadCount = async (buildId, downloadUrl) => {
   try {
-    const response = await fetch("/api/builds/" + buildId + "/increment", {
+    console.log(`Incrementing download count for build ${buildId}...`);
+
+    // Make the POST request to the server
+    const response = await fetch(`/api/builds/${buildId}/increment`, {
       method: "POST",
     });
-    if (!response.ok) throw new Error("Failed to increment download count");
+
+    // Check if the response is OK (status code 200-299)
+    if (!response.ok) {
+      const errorData = await response.json(); // Parse the error response from the server
+      throw new Error(
+        `Failed to increment download count: ${
+          errorData.error || response.statusText
+        }`
+      );
+    }
+
+    // Parse the successful response
+    const data = await response.json();
+    console.log(
+      `Successfully incremented download count for build ${buildId}:`,
+      data
+    );
+
+    window.location.href = downloadUrl;
+
+    return data; // Return the response data if needed
   } catch (error) {
-    console.error("Error incrementing download count:", error);
+    console.error("Error incrementing download count:", error.message || error);
+    throw error; // Re-throw the error for further handling if necessary
   }
 };
 
@@ -44,7 +68,7 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
   filteredBuilds.forEach((build) => {
     const buildItem = document.createElement("div");
     buildItem.className =
-      "p-4 bg-dark-purple rounded-lg hover:bg-dark-purple transition-all duration-300";
+      "p-4 bg-dark-purple rounded-lg hover:bg-dark-purple transition-all duration-300 download-button";
     buildItem.innerHTML = `
           <h3 class="text-xl font-semibold text-purple-400">${build.name}</h3>
           <div class="mb-4">
@@ -54,9 +78,11 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
           </div>
           <p class="text-gray-400 mb-4">${build.date}</p>
           <a
-            href="${build.downloadUrl}"
+            href="#"
             class="w-full block text-center bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300"
-            onclick="incrementDownloadCount(${build.id})"
+            onclick="incrementDownloadCount(${build.id}, '${
+      build.downloadUrl
+    }')"
           >
             Download
           </a>

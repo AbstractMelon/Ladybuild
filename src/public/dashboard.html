@@ -73,15 +73,19 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           <div class="card bg-dark-purple rounded-lg p-4">
             <h2 class="text-2xl font-semibold">Total Downloads</h2>
-            <p class="text-4xl">12345</p>
+            <p class="text-4xl" id="totalDownloads">0</p>
           </div>
           <div class="card bg-dark-purple rounded-lg p-4">
-            <h2 class="text-2xl font-semibold">Weekly Downloads</h2>
-            <p class="text-4xl">567</p>
+            <h2 class="text-2xl font-semibold">Linux Downloads</h2>
+            <p class="text-4xl" id="linuxDownloads">0</p>
           </div>
           <div class="card bg-dark-purple rounded-lg p-4">
-            <h2 class="text-2xl font-semibold">Monthly Downloads</h2>
-            <p class="text-4xl">2345</p>
+            <h2 class="text-2xl font-semibold">Windows Downloads</h2>
+            <p class="text-4xl" id="windowsDownloads">0</p>
+          </div>
+          <div class="card bg-dark-purple rounded-lg p-4">
+            <h2 class="text-2xl font-semibold">macOS Downloads</h2>
+            <p class="text-4xl" id="macDownloads">0</p>
           </div>
         </div>
 
@@ -93,50 +97,75 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      const ctx = document.getElementById("downloadsChart").getContext("2d");
-      const downloadsChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: ["January", "February", "March", "April", "May"],
-          datasets: [
-            {
-              label: "Downloads",
-              data: [300, 500, 400, 700, 600],
-              borderColor: "#8b5cf6",
-              backgroundColor: "rgba(139, 92, 246, 0.2)",
-              borderWidth: 8,
+      async function fetchDownloadData() {
+        const response = await fetch("/api/builds/downloads");
+        const data = await response.json();
+        return data.downloadCounts;
+      }
+
+      async function updateDashboard() {
+        const downloadCounts = await fetchDownloadData();
+        const totalDownloads = Object.values(downloadCounts).reduce(
+          (sum, count) => (typeof count === "number" ? sum + count : sum),
+          0
+        );
+        const linuxDownloads = downloadCounts["1"] || 0;
+        const windowsDownloads = downloadCounts["2"] || 0;
+        const macDownloads = downloadCounts["3"] || 0;
+        document.getElementById("totalDownloads").textContent = totalDownloads;
+        document.getElementById("linuxDownloads").textContent = linuxDownloads;
+        document.getElementById("windowsDownloads").textContent =
+          windowsDownloads;
+        document.getElementById("macDownloads").textContent = macDownloads;
+
+        const ctx = document.getElementById("downloadsChart").getContext("2d");
+        const downloadsChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: Object.keys(downloadCounts),
+            datasets: [
+              {
+                label: "Downloads",
+                data: Object.keys(downloadCounts).map(
+                  (key) => downloadCounts[key].length
+                ),
+                borderColor: "#8b5cf6",
+                backgroundColor: "rgba(139, 92, 246, 0.2)",
+                borderWidth: 8,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: "rgba(255, 255, 255, 0.1)",
+                },
+                ticks: {
+                  color: "#e0e0e0",
+                },
+              },
+              x: {
+                grid: {
+                  color: "rgba(255, 255, 255, 0.1)",
+                },
+                ticks: {
+                  color: "#e0e0e0",
+                },
+              },
             },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: "rgba(255, 255, 255, 0.1)",
-              },
-              ticks: {
-                color: "#e0e0e0",
-              },
-            },
-            x: {
-              grid: {
-                color: "rgba(255, 255, 255, 0.1)",
-              },
-              ticks: {
-                color: "#e0e0e0",
+            plugins: {
+              legend: {
+                labels: {
+                  color: "#e0e0e0",
+                },
               },
             },
           },
-          plugins: {
-            legend: {
-              labels: {
-                color: "#e0e0e0",
-              },
-            },
-          },
-        },
-      });
+        });
+      }
+      updateDashboard();
     </script>
   </body>
 </html>
