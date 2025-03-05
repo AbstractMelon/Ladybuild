@@ -71,11 +71,11 @@ const renderBuilds = (builds, searchQuery = "", selectedPlatform = "all") => {
       "p-4 bg-dark-purple rounded-lg hover:bg-dark-purple transition-all duration-300 download-button";
     buildItem.innerHTML = `
           <h3 class="text-xl font-semibold text-purple-400">${build.name}</h3>
-          <div class="mb-4">
+          <!-- <div class="mb-4">
             <span class="bg-purple-600 text-white px-2 py-1 rounded text-sm">
               ${build.platform?.toUpperCase() ?? "None"}
             </span>
-          </div>
+          </div> -->
           <p class="text-gray-400 mb-4">${build.date}</p>
           <a
             href="#"

@@ -43,6 +43,16 @@
         color: #f3f4f6;
         font-size: 1.5rem;
       }
+      #popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #2a2a40;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        z-index: 1001;
+      }
     </style>
   </head>
   <body class="font-sans">
@@ -100,6 +110,32 @@
       </main>
     </div>
 
+    <div
+      id="popup"
+      class="hidden fixed top-0 right-0 p-4 bg-purple-600 rounded-lg border border-purple-800"
+    >
+      <p class="text-xl text-white font-semibold mb-2">Congratulations!</p>
+      <p class="text-white">
+        You have successfully installed Ladybird on your
+        <span id="os"></span> device.
+      </p>
+      <button
+        id="closePopup"
+        class="mt-4 p-2 bg-purple-800 rounded-lg text-white font-semibold text-xl transition duration-300"
+        onclick="document.getElementById('popup').classList.add('hidden')"
+      >
+        Close
+      </button>
+    </div>
+
+    <script>
+      const useragent = navigator.userAgent;
+      if (useragent.includes("Ladybird")) {
+        const os = useragent.split("(")[1].split(")")[0];
+        document.getElementById("os").innerText = os;
+        document.getElementById("popup").classList.remove("hidden");
+      }
+    </script>
     <script src="script.js"></script>
   </body>
 </html>
