@@ -1,0 +1,250 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #00b894;
+    --background-color: #0a0a0a;
+    --card-background: #1a1a1a;
+    --text-color: #ffffff;
+    --text-secondary: #b3b3b3;
+    --warning-color: #ff4757;
+    --glow-color: rgba(108, 92, 231, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.orb {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.15;
+    top: -200px;
+    right: -200px;
+    z-index: -1;
+    animation: float 8s ease-in-out infinite;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.warning {
+    background-color: rgba(255, 71, 87, 0.1);
+    border: 1px solid var(--warning-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warning i {
+    color: var(--warning-color);
+    font-size: 1.5rem;
+}
+
+.warning a {
+    color: var(--warning-color);
+    text-decoration: none;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 500px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background-color: var(--card-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.platform-select {
+    padding: 1rem;
+    background-color: var(--card-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.builds-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.build-card {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.build-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.build-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.build-header i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.build-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.download-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #5a4bd1;
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.weekly-build {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.weekly-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weekly-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.weekly-btn i {
+    margin-right: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .platform-select {
+        width: 100%;
+    }
+}

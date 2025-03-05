@@ -1,141 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LadyBuild - Unofficial Ladybird Builds</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6',
+                        secondary: '#93C5FD',
+                        dark: {
+                            bg: '#030303',
+                            card: '#111111',
+                            hover: '#1a1a1a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'fade-in': 'fade-in 0.3s ease-out',
+                        'fade-out': 'fade-out 0.3s ease-out'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'fade-out': {
+                            '0%': { opacity: '1' },
+                            '100%': { opacity: '0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-      body {
-        background-color: #1a1a2e;
-        color: #e0e0e0;
-      }
-      .bg-dark-purple {
-        background-color: #2a2a40;
-      }
-      .hover\:bg-dark-purple:hover {
-        background-color: #3a3a50;
-      }
-      .banner {
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-        color: #f3f4f6;
-        padding: 1rem;
-        text-align: center;
-        z-index: 1000;
-      }
-      .banner a {
-        text-decoration: underline;
-        color: #d1d5db;
-      }
-      .close-banner {
-        position: absolute;
-        right: 1rem;
-        top: 0.5rem;
-        cursor: pointer;
-        background: none;
-        border: none;
-        color: #f3f4f6;
-        font-size: 1.5rem;
-      }
-      #popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #2a2a40;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        z-index: 1001;
-      }
+        select option {
+            background-color: #111111;
+            color: white;
+            padding: 0.75rem 1rem;
+        }
+        select option:hover, select option:focus {
+            background-color: #1a1a1a;
+        }
+        select:focus option:checked {
+            background: linear-gradient(to top, #8B5CF6, #93C5FD);
+        }
+        .logo-gradient {
+            background: linear-gradient(
+                to top,
+                #8B5CF6,
+                #A78BFA,
+                #93C5FD
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-icon {
+            color: #9ca3af;
+            opacity: 1;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .weekly-btn {
+            background: linear-gradient(to right, #7C3AED, #60A5FA) !important;
+            transition: all 0.3s ease;
+        }
+        .weekly-btn:hover {
+            background: linear-gradient(to right, #6D28D9, #3B82F6) !important;
+        }
+        .bg-primary {
+            background: linear-gradient(to right, #7C3AED, #60A5FA) !important;
+        }
+        .bg-primary:hover {
+            background: linear-gradient(to right, #6D28D9, #3B82F6) !important;
+        }
+        .card-shadow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.03);
+        }
     </style>
-  </head>
-  <body class="font-sans">
-    <div class="banner bg-red-500 mb-4">
-      <p class="text-lg">
-        <b>WARNING:</b> This is not an official site. Official downloads will be
-        available by the creators in 2026. Report issues
-        <a href="https://github.com/abstractmelon/ladybuild/issues">here</a>.
-      </p>
-      <button
-        class="close-banner"
-        onclick="this.parentElement.style.display='none'"
-      >
-        &times;
-      </button>
-    </div>
-    <header class="text-center py-8">
-      <h1 class="text-6xl font-bold text-purple-400">LadyBuild</h1>
-      <p class="text-2xl mt-2">Unofficial Ladybird Builds</p>
-    </header>
+</head>
+<body class="bg-dark-bg text-white min-h-screen relative overflow-x-hidden">
+    <div class="fixed w-[1200px] h-[1200px] bg-gradient-to-tr from-primary/30 via-secondary/20 to-primary/10 blur-[150px] opacity-40 -top-[400px] -right-[400px] -z-10"></div>
+    <div class="fixed w-[800px] h-[800px] bg-gradient-to-bl from-secondary/20 via-primary/15 to-secondary/10 blur-[130px] opacity-30 -bottom-[200px] -left-[200px] -z-10"></div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-6xl mt-16">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 logo-gradient tracking-tight leading-relaxed py-1" style="letter-spacing: -0.03em;">
+                Lady<span class="font-extrabold">Build</span>
+            </h1>
+            <p class="text-gray-400 text-sm">Unofficial Ladybird Builds</p>
+            <a href="https://ladybird.org" class="inline-block mt-2 text-sm text-primary/80 hover:text-primary transition-colors">
+                <i class="fas fa-external-link-alt mr-1"></i>
+                Visit Official Ladybird Website
+            </a>
+        </header>
 
-    <div class="container mx-auto p-4">
-      <main>
-        <div class="flex justify-center space-x-4 mb-6">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search builds..."
-            class="w-full max-w-md p-2 bg-dark-purple rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          <select
-            id="platformFilter"
-            class="p-2 bg-dark-purple rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-          >
-            <option value="all">All Platforms</option>
-            <option value="windows">Windows</option>
-            <option value="linux">Linux</option>
-            <option value="macos">macOS</option>
-          </select>
+        <div id="warning-popup" class="fixed top-2 left-1/2 -translate-x-1/2 z-50 bg-red-500/10 border border-red-500 rounded-lg p-3 sm:p-4 flex items-start text-left gap-2.5 sm:gap-4 max-w-2xl w-[calc(100%-1rem)] shadow-lg backdrop-blur-sm animate-fade-in mx-2">
+            <i class="fas fa-triangle-exclamation text-red-500 text-base sm:text-lg mt-0.5 flex-shrink-0"></i>
+            <div class="text-red-500 text-xs sm:text-sm space-y-2 flex-1">
+                <p>These are <strong>unofficial development builds</strong> of a very early beta. Ladybird is currently in heavy development and not ready for daily use.</p>
+                <p>Official downloads will be made available by the creators in 2026. <a href="https://github.com/abstractmelon/ladybuild/issues" class="underline hover:text-red-400">Report issues here</a>.</p>
+            </div>
+            <button onclick="document.getElementById('warning-popup').classList.add('animate-fade-out'); setTimeout(() => document.getElementById('warning-popup').remove(), 300)" class="text-red-500 hover:text-red-400 transition-colors flex-shrink-0 p-1.5 rounded-lg hover:bg-red-500/10" aria-label="Close warning">
+                <i class="fas fa-xmark"></i>
+            </button>
         </div>
 
-        <!-- <div class="flex justify-center mb-6">
-          <button
-            id="weeklyBuild"
-            class="w-full p-3 bg-purple-600 hover:bg-purple-800 rounded-lg text-white font-semibold text-xl transition duration-300"
-          >
-            Download Weekly Build
-          </button>
-        </div> -->
+        <div class="flex flex-col gap-3 sm:gap-4 justify-center mb-8">
+            <div class="relative w-full max-w-lg mx-auto">
+                <i class="fas fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 search-icon"></i>
+                <input type="text" placeholder="Search builds..." 
+                    class="w-full pl-10 pr-3 py-2.5 bg-dark-card border border-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm">
+            </div>
+            <div class="relative w-full max-w-lg mx-auto">
+                <select class="w-full appearance-none px-3 py-2.5 bg-dark-card border border-gray-800/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 pr-8 cursor-pointer text-sm hover:bg-dark-hover transition-colors duration-200" aria-label="Select platform">
+                    <option value="all" class="py-2">All Platforms</option>
+                    <option value="windows" class="py-2">Windows</option>
+                    <option value="linux" class="py-2">Linux</option>
+                    <option value="macos" class="py-2">macOS</option>
+                </select>
+                <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-transform duration-200"></i>
+            </div>
+        </div>
 
-        <div
-          id="buildList"
-          class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
-        ></div>
-      </main>
+        <div class="text-center mb-8">
+            <button class="weekly-btn bg-gradient-to-r from-primary to-secondary text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/10 hover:scale-105 w-full sm:w-auto">
+                <i class="fas fa-arrow-down mr-2"></i>
+                Download Weekly Build
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="bg-dark-card rounded-xl p-6 card-shadow transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/10 border border-gray-800/10">
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fab fa-windows text-3xl text-primary"></i>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl font-semibold">Ladybird 0.1.0 Windows</h2>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Stable(ish)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-gray-400">2025-03-04</p>
+                    <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-download mr-2"></i>Download
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">WINDOWS</span>
+                </div>
+            </div>
+
+            <div class="bg-dark-card rounded-xl p-6 card-shadow transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/10 border border-gray-800/10">
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fab fa-linux text-3xl text-primary"></i>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl font-semibold">Ladybird 0.1.0 Linux</h2>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Stable(ish)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-gray-400">2025-03-04</p>
+                    <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-download mr-2"></i>Download
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">LINUX</span>
+                </div>
+            </div>
+
+            <div class="bg-dark-card rounded-xl p-6 card-shadow transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/10 border border-gray-800/10">
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fab fa-apple text-3xl text-primary"></i>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl font-semibold">Ladybird 0.1.0 macOS</h2>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Stable(ish)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-gray-400">2025-03-04</p>
+                    <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-download mr-2"></i>Download
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">MACOS</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-gray-400">
+            <div class="space-y-2">
+                <p>Site by <a href="https://abstractmelon.net/" class="text-primary hover:text-primary/80 transition-colors duration-300">abstractmelon</a></p>
+                <p class="text-sm">
+                    <a href="https://github.com/AbstractMelon/Ladybuild" class="inline-flex items-center gap-1.5 text-primary/80 hover:text-primary transition-colors duration-300">
+                        <i class="fab fa-github"></i>
+                        <span>Source Code</span>
+                    </a>
+                </p>
+            </div>
+        </footer>
     </div>
-
-    <div
-      id="popup"
-      class="hidden fixed top-0 right-0 p-4 bg-purple-600 rounded-lg border border-purple-800"
-    >
-      <p class="text-xl text-white font-semibold mb-2">Congratulations!</p>
-      <p class="text-white">
-        You have successfully installed Ladybird on your
-        <span id="os"></span> device.
-      </p>
-      <button
-        id="closePopup"
-        class="mt-4 p-2 bg-purple-800 rounded-lg text-white font-semibold text-xl transition duration-300"
-        onclick="document.getElementById('popup').classList.add('hidden')"
-      >
-        Close
-      </button>
-    </div>
-
-    <script>
-      const useragent = navigator.userAgent;
-      if (useragent.includes("Ladybird")) {
-        const os = useragent.split("(")[1].split(")")[0];
-        document.getElementById("os").innerText = os;
-        document.getElementById("popup").classList.remove("hidden");
-      }
-    </script>
     <script src="script.js"></script>
-  </body>
-</html>
+</body>
+</html> 
